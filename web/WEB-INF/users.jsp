@@ -25,7 +25,7 @@
         </table>
         
             
-    
+        <h2>Add User</h2>
         <form method="post">
             <label>Username:</label><input type="text" name="addUser" value="${addUser}">
             <label>First Name:</label><input type="text" name="addFirstName" value="${addFirstName}">
