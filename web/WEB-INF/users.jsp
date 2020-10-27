@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Users</title>
+        <link href="./usercss.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <h1>Manager Users</h1>
@@ -27,7 +28,6 @@
             </tr>
             <c:forEach items="${userList}" var="user">
             <tr>
-          
               <td><p>${user.username}</p></td>
                 <td><p>${user.firstname}</p></td>
                 <td><p>${user.lastname}</p></td>

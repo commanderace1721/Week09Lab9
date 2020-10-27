@@ -53,7 +53,7 @@ public class UserServlet extends HttpServlet{
     
     if(action != null && action.equals("deleteItem"))
     {
-        request.setAttribute("message", "this is a test");
+        
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
                .forward(request,response);
         return;
@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet{
    
     if(action != null && action.equals("saveItem"))
     {
-        request.setAttribute("message", "Successfully Saved");
+        
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
                .forward(request,response);
         return;

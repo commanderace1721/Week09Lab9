@@ -1,0 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 27, 2020, 10:49:03 AM
+    Author     : Chris
+*/
+table#t1{
+    background-color:aliceblue;
+}
+
+table#t1 tr:hover{
+    background-color: grey;
+}
