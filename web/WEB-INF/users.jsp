@@ -14,14 +14,41 @@
     <body>
         <h1>Manager Users</h1>
         <h2>Users</h2>
-        <table name="t1">
+        <table class="t1">
+            
+            <c:forEach items="${userList}" var="user">
             <tr>
-                <td><h3>username</h3></td><td><h3>First Name</h3></td><td><h3>Last Name</h3></td><td><h3>Email</h3></td><td></td><td><h3>Delete</h3></td><td><h3>Edit</h3></td>
+                <td><p>${user.username}</p></td>
+                <td><p>${user.firstname}</p></td>
+                <td><p>${user.lastname}</p></td>
+                <td><p>${user.email}</p></td>
+                <td></td>
+                <td>
+                    <form action="" method="POST" name="delete">
+                        <input type="hidden" name="user" value="${user}"/>
+                        <input type="submit" name="request" value="delete"/>
+                    </form>
+                </td>
+                <td>
+                    <form action="" method="POST" name="edit">
+                        <input type="hidden" name="user" value="${user}"/>
+                        <input type="submit" name="request" value="edit"/>
+                    </form>
+                </td>
             </tr>
-            <tr>
-                <td><p>${username}</p></td><td><p>${firstname}</p></td><td><p>${lastname}</p></td><td><p>${email}</p></td><td></td><td><form action="users" method="post" name="delete"><input type="submit" value="Delete"> <input type="hidden" name="action" value="reset"></form></td>
-                <td><form action="" method="" name="edit"><input type="submit" value="Edit"></form></td>
-            </tr>
+            </c:forEach>
         </table>
+        
+            
+        <h2>Add User</h2>
+        <form method="post">
+            <label>Username:</label><input type="text" name="addUser" value="${addUser}">
+            <label>First Name:</label><input type="text" name="addFirstName" value="${addFirstName}">
+            <label>Last Name:</label><input type="text" name="addLastName" value="${addLastName}">
+            <label>Password:</label><input type="text" name="addPassword" value="${addPassword}">
+            <label>Email:</label><input type="text" name="addEmail" value="${addEmail}">
+            <input type="submit" name="Save" value="Save">
+        </form>    
+        
     </body>
 </html>
