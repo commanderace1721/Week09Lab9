@@ -15,7 +15,15 @@
         <h1>Manager Users</h1>
         <h2>Users</h2>
         <table class="t1">
-            
+            <tr>
+                <td><h3>username</h3></td
+                ><td><h3>First Name</h3></td>
+                <td><h3>Last Name</h3></td>
+                <td><h3>Email</h3></td>
+                <td></td>
+                <td><h3>Delete</h3></td>
+                <td><h3>Edit</h3></td>
+            </tr>
             <c:forEach items="${userList}" var="user">
             <tr>
                 <td><p>${user.username}</p></td>
