@@ -29,7 +29,15 @@ public class UserServlet extends HttpServlet{
       // getting data from database using the User
       UserService userServive = new UserService();
       
-     
+             
+      // getting data from database using the User
+      ArrayList<User> user = userServive.getAll();
+      request.setAttribute("userList", user);
+        
+        
+      getServletContext().getRequestDispatcher("/WEB-INF/user.jsp")
+               .forward(request,response);
+
         
         
       getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
