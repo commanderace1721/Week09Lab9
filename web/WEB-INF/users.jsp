@@ -24,14 +24,16 @@
                 <td><p>${user.email}</p></td>
                 <td></td>
                 <td>
-                    <form action="" method="POST" name="delete">
+                    <form action="users" method="POST" name="delete">
                         <input type="hidden" name="user" value="${user}"/>
+                        <input type="hidden" name="action" value="deleteItem"/>
                         <input type="submit" name="request" value="delete"/>
                     </form>
                 </td>
                 <td>
                     <form action="" method="POST" name="edit">
                         <input type="hidden" name="user" value="${user}"/>
+                        <input type="hidden" name="action" value="editItem"/>
                         <input type="submit" name="request" value="edit"/>
                     </form>
                 </td>
@@ -39,14 +41,15 @@
             </c:forEach>
         </table>
         
-            
+           ${message} 
         <h2>Add User</h2>
-        <form method="post">
+        <form action="users" method="post">
             <label>Username:</label><input type="text" name="addUser" value="${addUser}">
             <label>First Name:</label><input type="text" name="addFirstName" value="${addFirstName}">
             <label>Last Name:</label><input type="text" name="addLastName" value="${addLastName}">
             <label>Password:</label><input type="text" name="addPassword" value="${addPassword}">
             <label>Email:</label><input type="text" name="addEmail" value="${addEmail}">
+            <input type="hidden" name="action" value="saveItem">
             <input type="submit" name="Save" value="Save">
         </form>    
         

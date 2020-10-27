@@ -43,9 +43,24 @@ public class UserServlet extends HttpServlet{
     
     String action = request.getParameter("action");
     
-    if(action != null && action.equals("reset"))
+    if(action != null && action.equals("deleteItem"))
     {
-        request.setAttribute("username", "this is a test");
+        request.setAttribute("message", "this is a test");
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+               .forward(request,response);
+        return;
+    }
+   
+    if(action != null && action.equals("saveItem"))
+    {
+        request.setAttribute("message", "Successfully Saved");
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+               .forward(request,response);
+        return;
+    }
+     if(action != null && action.equals("editItem"))
+    {
+        request.setAttribute("message", "Successfully Edit");
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
                .forward(request,response);
         return;
