@@ -9,9 +9,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Users</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Manager Users</h1>
+        <h2>Users</h2>
+        <table>
+            <tr>
+                <td><h3>username</h3></td><td><h3>First Name</h3></td><td><h3>Last Name</h3></td><td><h3>Email</h3></td><td> </td><td></td>
+            </tr>
+            <tr>
+                <td><p>${username}</p></td><td><p>${firstname}</p></td><td><p>${lastname}</p></td><td><p>${email}</p></td>
+            </tr>
+        </table>
+        
     </body>
 </html>
