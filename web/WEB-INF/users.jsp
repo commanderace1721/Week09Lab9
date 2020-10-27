@@ -24,5 +24,16 @@
             </tr>
         </table>
         
+            
+    
+        <form method="post">
+            <label>Username:</label><input type="text" name="addUser" value="${addUser}">
+            <label>First Name:</label><input type="text" name="addFirstName" value="${addFirstName}">
+            <label>Last Name:</label><input type="text" name="addLastName" value="${addLastName}">
+            <label>Password:</label><input type="text" name="addPassword" value="${addPassword}">
+            <label>Email:</label><input type="text" name="addEmail" value="${addEmail}">
+            <input type="submit" name="Save" value="Save">
+        </form>    
+        
     </body>
 </html>
