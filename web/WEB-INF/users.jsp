@@ -26,7 +26,8 @@
             </tr>
             <c:forEach items="${userList}" var="user">
             <tr>
-                <td><p>${user.username}</p></td>
+          
+              <td><p>${user.username}</p></td>
                 <td><p>${user.firstname}</p></td>
                 <td><p>${user.lastname}</p></td>
                 <td><p>${user.email}</p></td>
@@ -51,10 +52,15 @@
         <h2>Add User</h2>
         <form method="post">
             <label>Username:</label><input type="text" name="addUser" value="${addUser}">
+            <br>
             <label>First Name:</label><input type="text" name="addFirstName" value="${addFirstName}">
+            <br>
             <label>Last Name:</label><input type="text" name="addLastName" value="${addLastName}">
+            <br>
             <label>Password:</label><input type="text" name="addPassword" value="${addPassword}">
+            <br>
             <label>Email:</label><input type="text" name="addEmail" value="${addEmail}">
+            <br>
             <input type="submit" name="Save" value="Save">
         </form>    
         
