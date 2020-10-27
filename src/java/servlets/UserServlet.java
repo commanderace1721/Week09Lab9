@@ -5,14 +5,7 @@
  */
 package servlets;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,15 +23,22 @@ public class UserServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       
-
+      // getting data from database
+      
+     
+        
+        
+        
+      getServletContext().getRequestDispatcher("/WEB-INF/user.jsp")
+               .forward(request,response);
 
     }// ends doGet()
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+    
+    String action = request.getParameter("action");   
         
     }// ends doPost()
     
