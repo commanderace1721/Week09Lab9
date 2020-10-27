@@ -28,11 +28,11 @@ public class UserServlet extends HttpServlet{
         
       // getting data from database using the User
       UserService userServive = new UserService();
-      ArrayList<User> user = userServive.getAll();
-      request.setAttribute("userList", user);
+      
+     
         
         
-      getServletContext().getRequestDispatcher("/WEB-INF/user.jsp")
+      getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
                .forward(request,response);
 
     }// ends doGet()
@@ -41,7 +41,17 @@ public class UserServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
-    String action = request.getParameter("action");   
+    String action = request.getParameter("action");
+    
+    if(action != null && action.equals("reset"))
+    {
+        request.setAttribute("username", "this is a test");
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+               .forward(request,response);
+        return;
+    }
+    getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+               .forward(request,response);
         
     }// ends doPost()
     

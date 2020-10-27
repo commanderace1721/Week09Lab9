@@ -19,10 +19,9 @@
                 <td><h3>username</h3></td><td><h3>First Name</h3></td><td><h3>Last Name</h3></td><td><h3>Email</h3></td><td></td><td><h3>Delete</h3></td><td><h3>Edit</h3></td>
             </tr>
             <tr>
-                <td><p>${username}</p></td><td><p>${firstname}</p></td><td><p>${lastname}</p></td><td><p>${email}</p></td><td></td><td><form action="" method="" name="delete"><input type="submit" value="Delete"></form></td>
+                <td><p>${username}</p></td><td><p>${firstname}</p></td><td><p>${lastname}</p></td><td><p>${email}</p></td><td></td><td><form action="users" method="post" name="delete"><input type="submit" value="Delete"> <input type="hidden" name="action" value="reset"></form></td>
                 <td><form action="" method="" name="edit"><input type="submit" value="Edit"></form></td>
             </tr>
         </table>
-        
     </body>
 </html>
