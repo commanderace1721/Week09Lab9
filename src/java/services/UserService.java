@@ -5,7 +5,10 @@
  */
 package services;
 
+import dataaccess.ConnectionPool;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -37,8 +40,8 @@ public class UserService {
 
         return rowUpdated;
     }
-    
-           
+
+
    private String username;
    private String firstname;
    private String lastname;
@@ -48,37 +51,43 @@ public class UserService {
     public int insert(String username, String firstname, String lastname, String password, String email) throws SQLException
     {
         UserService service = new UserService();
-       String preparedQuery = 
-"INSERT INTO users "
-+ "(username, password, firstname, lastname,email) "
-+ "VALUES "
-+ "(?, ?, ?, ?, ?)";
-PreparedStatement ps = 
-NotesDB.prepareStatement(preparedQuery);
-ps.setString(1, service.getUsername());
-ps.setString(2, service.getPassword());
-ps.setString(3, service.getFirstname());
-ps.setString(4, service.getLastname());
-ps.setString(5, service.getEmail());
-int rows = ps.executeUpdate(); 
+        String preparedQuery = 
+                "INSERT INTO users "
+                + "(username, password, firstname, lastname,email) "
+                + "VALUES "
+                + "(?, ?, ?, ?, ?)";
+        PreparedStatement ps = 
+        NotesDB.prepareStatement(preparedQuery);
+        ps.setString(1, service.getUsername());
+        ps.setString(2, service.getPassword());
+        ps.setString(3, service.getFirstname());
+        ps.setString(4, service.getLastname());
+        ps.setString(5, service.getEmail());
+        int rows = ps.executeUpdate(); 
     }
     
-    
-      public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getFirstname() {
-        return firstname;
+    public int delete(String username) throws Exception{
+        //get connection
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        
+        //prepare Delete statement
+        String deleteQuery = "DELETE FROM users "
+                + "WHERE username = ?";
+        PreparedStatement delete = connection.prepareStatement(deleteQuery);
+        
+        //set the value and excute
+        delete.setString(0, username);
+        int rows = delete.executeUpdate();
+        
+        //release the connection and retrun the number of rows
+        pool.freeConnection(connection);
+        return rows;
     }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
-    }
+}
 
     public String getLastname() {
         return lastname;
