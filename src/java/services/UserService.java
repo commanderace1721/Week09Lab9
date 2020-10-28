@@ -27,12 +27,12 @@ public class UserService {
         
         ps.setString(1, username);
         ps.setString(2, password);
-        ps.setDouble(3, firstname);
+        ps.setString(3, firstname);
         ps.setString(4, lastname);
         ps.setString(6, email);
         ps.setString(7, username);
         
-        int rows = ps.executeUpdate();
+        rowUpdated = ps.executeUpdate();
 
         return rowUpdated;
     }
