@@ -8,16 +8,21 @@ package services;
 import dataaccess.ConnectionPool;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.ResultSet;
+import models.User;
 
 /**
  *
  * @author Group CCC
  */
-public class UserService {
-    
+public class UserService 
+{
+
     public int update(String username, String password, String firstname, String lastname, String email) throws Exception {
         int rowUpdated = 0;
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
         
         String preparedSQL = "UPDATE users SET "
                             + "   username = ?," 
@@ -40,32 +45,52 @@ public class UserService {
 
         return rowUpdated;
     }
-
-
-   private String username;
-   private String firstname;
-   private String lastname;
-   private String password;
-   private String email;
    
+        
+       public User get(String username) throws Exception {
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        
+        
+        String preparedSQL ="SELECT * " 
+                   + "FROM users WHERE username = ?";
+
+        
+        PreparedStatement ps = connection.prepareStatement(preparedSQL);
+        
+        ps.setString(1, username);
+        
+        ResultSet p1 = ps.executeQuery();
+
+          User u1 = new User(p1.getString("username"),p1.getString("password"),
+                  p1.getString("firstname"), p1.getString("lastname"),p1.getString("email"));
+          
+          connection.close();
+
+        return u1;
+     }
+    
+          
     public int insert(String username, String firstname, String lastname, String password, String email) throws SQLException
     {
-        UserService service = new UserService();
-        String preparedQuery = 
-                "INSERT INTO users "
-                + "(username, password, firstname, lastname,email) "
-                + "VALUES "
-                + "(?, ?, ?, ?, ?)";
-        PreparedStatement ps = 
-        NotesDB.prepareStatement(preparedQuery);
-        ps.setString(1, service.getUsername());
-        ps.setString(2, service.getPassword());
-        ps.setString(3, service.getFirstname());
-        ps.setString(4, service.getLastname());
-        ps.setString(5, service.getEmail());
-        int rows = ps.executeUpdate(); 
+  
+    String preparedQuery =
+        "INSERT INTO users "
+    + "(username, password, firstname, lastname,email) "
+    + "VALUES "
+    + "(?, ?, ?, ?, ?)";
+    PreparedStatement ps = connection.prepareStatement(preparedQuery);
+    ps.setString(1, username);
+    ps.setString(2, password);
+    ps.setString(3, firstname);
+    ps.setString(4, lastname);
+    ps.setString(5, email);
+    int rows = ps.executeUpdate(); 
+        return rows;
     }
     
+        
     public int delete(String username) throws Exception{
         //get connection
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -83,34 +108,6 @@ public class UserService {
         //release the connection and retrun the number of rows
         pool.freeConnection(connection);
         return rows;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-}
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
     
 }
