@@ -7,6 +7,8 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +77,12 @@ public class UserServlet extends HttpServlet{
             String password = (String) request.getAttribute("addPassword");
             String email = (String) request.getAttribute("addEmail");
             if((boolean)session.getAttribute("editing")){
-                int row = userService.update(userName, fname, lname ,password, email);
+                int row;
+                try {
+                    row = userService.update(userName, fname, lname ,password, email);
+                } catch (Exception ex) {
+                    Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 if (row == 1){
                     request.setAttribute("message", "Successfully Edit");
                 }else{
@@ -83,7 +90,7 @@ public class UserServlet extends HttpServlet{
                 }
                 session.setAttribute("editing", false);
             } else {
-                int idkWhatsTheReturnTypeFor = userService.insert(userName, fname, lname, password, email);
+                int row = userService.insert(userName, fname, lname, password, email);
             }
         }
        
