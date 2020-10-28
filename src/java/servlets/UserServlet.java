@@ -77,7 +77,7 @@ public class UserServlet extends HttpServlet{
             String password = (String) request.getAttribute("addPassword");
             String email = (String) request.getAttribute("addEmail");
             if((boolean)session.getAttribute("editing")){
-                int row;
+                int row = 0;
                 try {
                     row = userService.update(userName, fname, lname ,password, email);
                 } catch (Exception ex) {
@@ -86,7 +86,7 @@ public class UserServlet extends HttpServlet{
                 if (row == 1){
                     request.setAttribute("message", "Successfully Edit");
                 }else{
-                    request.setAttribute("message", "Modification Unseccessfull");
+                    request.setAttribute("message", "Modification Unsuccessful");
                 }
                 session.setAttribute("editing", false);
             } else {
