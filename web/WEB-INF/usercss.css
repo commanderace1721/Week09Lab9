@@ -5,12 +5,172 @@ and open the template in the editor.
 */
 /* 
     Created on : Oct 27, 2020, 10:49:03 AM
-    Author     : Chris
+    Author     : Anmol
 */
-table#t1{
-    background-color:aliceblue;
+body
+  {
+      background-color: #D3D3D3;      
+      background-size: 100%;
+
+  }
+  .logo
+  {
+      width: 132px;
+      height: 132px;
+      position: absolute;
+      margin-left: 20px;
+      margin-top: 6px;
+
+  }
+
+  header
+  {
+      background-color: #2dabff;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      height: 147px;
+      border-color: black;
+      border: solid rgb(0, 0, 0,0.5);
+      border-width:  4px;
+  }
+
+  .mainTitle
+  {
+    font-size: 29px;
+    font-weight: bold;
+    position: absolute;
+    margin-left: 165px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: underline;
+    margin-top: 52px;
+  }
+
+  .menu
+  {
+    position: absolute;
+    height: 40px;
+    margin-top: 43px;
+    margin-left: 630px;
+    column-gap: 0px;
+    overflow: hidden;
+    border-spacing: 10px;
+    border-collapse: separate;
+  }
+
+ header td
+  {
+      width: 190px;     
+      text-align: center;
+      font-size: 19px;
+      color: white;
+      font-weight: lighter;
+  }
+
+.og
+  {
+    font-size: 25px;
+    color: rgb(255, 192, 74);
+    font-weight: bold;
+  }
+ .show
+ {
+  background-color: #2dabff;
+  width: 100%;
+  height: auto;
+  border: solid rgb(0, 0, 0,0.7);
+  border-width:  4px;
+  margin-top: 30px;
+ }
+
+ .show h1,h2,#sel
+ {
+  font-size: 50px;
+  font-weight: bolder;
+  font-style: italic;
+  color: darkblue ;
+  position: relative;
+  margin-left: 650px;
+  font-family: 'Times New Roman', Times, serif;
+ }
+
+
+ .t1
+{
+  background-color: #2dabff;
+  border-color: black;
+  padding: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
 }
 
-table#t1 tr:hover{
+.t1 h3,p
+{
+  font-size: 27px;
+  margin-right: 9px;
+  color: rgb(2, 2, 141);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 39px;
+}
+
+.show input
+{
+  font-size: 27px;
+  margin-left: 35px;
+  margin-top: 5px;
+  color: rgb(2, 2, 141); 
+  position: relative;
+  background-color: rgb(255, 192, 74);
+  border: solid darkblue;
+  border-width:  3px;
+  font-style: italic;
+}
+
+.t1 tr:hover{
     background-color: grey;
+}
+
+.add
+{
+  background-color: #2dabff;
+  width: 100%;
+  height: auto;
+  border: solid rgb(0, 0, 0,0.7);
+  border-width:  4px;
+  margin-top: 30px;
+  height: auto;
+}
+
+.add table
+{
+  background-color: #2dabff;
+  border-color: black;
+  padding: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+}
+
+.add input
+{
+  font-size: 27px;
+  margin-left: 35px;
+  margin-top: 5px;
+  color: rgb(2, 2, 141); 
+  position: relative;
+  background-color: rgb(255, 192, 74);
+  border: solid darkblue;
+  border-width:  3px;
+  font-style: italic;
+}
+
+.add label
+{
+  font-size: 27px;
+  color: rgb(2, 2, 141); 
+  position: relative;
+  font-weight: bold;
 }
