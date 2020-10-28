@@ -8,6 +8,7 @@ package services;
 import dataaccess.ConnectionPool;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.ResultSet;
 import models.User;
 
@@ -44,7 +45,7 @@ public class UserService
 
         return rowUpdated;
     }
-    
+   
         
        public User get(String username) throws Exception {
         
@@ -70,6 +71,23 @@ public class UserService
         return u1;
      }
     
+          
+    public int insert(String username, String firstname, String lastname, String password, String email) throws SQLException
+    {
   
+    String preparedQuery =
+        "INSERT INTO users "
+    + "(username, password, firstname, lastname,email) "
+    + "VALUES "
+    + "(?, ?, ?, ?, ?)";
+    PreparedStatement ps = connection.prepareStatement(preparedQuery);
+    ps.setString(1, username);
+    ps.setString(2, password);
+    ps.setString(3, firstname);
+    ps.setString(4, lastname);
+    ps.setString(5, email);
+    int rows = ps.executeUpdate(); 
+        return rows;
+    }
     
 }
