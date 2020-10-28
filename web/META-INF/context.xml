@@ -2,7 +2,7 @@
 <Context path="/ClassProjectCCC">
   <Resource name="jdbc/notesdb" auth="Container" 
   driverClassName="com.mysql.jdbc.Driver" 
-  url="jdbc:mysql://localhost:3306/notesdb?autoReconnect=true?serverTimezone=UTC" 
+  url="jdbc:mysql://localhost:3306/notesdb?autoReconnect=true?" 
   username="root" password="password" 
   type="javax.sql.DataSource" maxActive="100" maxIdle="30" maxWait="10000" 
   removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true" />
