@@ -75,8 +75,12 @@ public class UserServlet extends HttpServlet{
             String password = (String) request.getAttribute("addPassword");
             String email = (String) request.getAttribute("addEmail");
             if((boolean)session.getAttribute("editing")){
-                int idkWhatsTheReturnTypeFor = userService.update(userName, fname, lname ,password, email);
-                request.setAttribute("message", "Successfully Edit");
+                int row = userService.update(userName, fname, lname ,password, email);
+                if (row == 1){
+                    request.setAttribute("message", "Successfully Edit");
+                }else{
+                    request.setAttribute("message", "Modification Unseccessfull");
+                }
                 session.setAttribute("editing", false);
             } else {
                 int idkWhatsTheReturnTypeFor = userService.insert(userName, fname, lname, password, email);
