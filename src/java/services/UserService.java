@@ -5,10 +5,13 @@
  */
 package services;
 
+
 /**
  *
  * @author Group CCC
  */
-public class UserService {
-    
+import models.User;
+public class UserService 
+{
+ 
 }
