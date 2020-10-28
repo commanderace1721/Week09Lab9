@@ -18,6 +18,7 @@ public class UserService {
         
         String preparedSQL = "UPDATE users SET "
                             + "   username = ?," 
+                            + "   password = ?," 
                             + "   firstname = ?, "
                             + "   lastname = ?,"
                             + "   email = ?"
