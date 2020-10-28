@@ -108,6 +108,6 @@ public class UserService
         //release the connection and retrun the number of rows
         pool.freeConnection(connection);
         return rows;
-    }
+    }  
     
 }
