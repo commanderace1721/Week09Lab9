@@ -30,8 +30,8 @@ public class UserService {
         ps.setString(2, password);
         ps.setString(3, firstname);
         ps.setString(4, lastname);
-        ps.setString(6, email);
-        ps.setString(7, username);
+        ps.setString(5, email);
+        ps.setString(6, username);
         
         rowUpdated = ps.executeUpdate();
 
