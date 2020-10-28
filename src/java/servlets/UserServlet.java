@@ -30,8 +30,8 @@ public class UserServlet extends HttpServlet{
             throws ServletException, IOException {
         
       // getting data from database using the UserService
-      UserService userServive = new UserService();
-      ArrayList<User> user = userServive.getAll();
+      UserService userService = new UserService();
+      ArrayList<User> user = userService.getAll();
       request.setAttribute("userList", user);        
         
       getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
@@ -51,7 +51,15 @@ public class UserServlet extends HttpServlet{
        User userData = (User) request.getAttribute("user");
       
         if(action.equals("deleteItem")){
-            userService.delete(userData.getUsername());
+            
+           try {
+               int r = userService.delete(userData.getUsername());
+               
+               if (r!=0)request.setAttribute("message", "Deleted successfully");
+           } catch (Exception ex) {
+               Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+               request.setAttribute("message", "error occurred");
+           }
         }
        
         if(action.equals("editItem")){
