@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import models.User;
 
 /**
@@ -71,10 +74,27 @@ public class UserService
         return u1;
      }
     
+    public List getAll() throws Exception{
+        List<User> allUsers = new ArrayList();
+        
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        Statement ps = connection.createStatement();
+        ResultSet userList = ps.executeQuery("SELECT * FROM users");
+        while(userList.next()){
+            allUsers.add(new User(userList.getString("username"),userList.getString("password"),
+                    userList.getString("firstname"),userList.getString("lastname"),userList.getString("email")));
+        }
+        pool.freeConnection(connection);
+        userList.close();
+        return allUsers;
+    }
           
     public int insert(String username, String firstname, String lastname, String password, String email) throws SQLException
     {
-  
+       ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        
     String preparedQuery =
         "INSERT INTO users "
     + "(username, password, firstname, lastname,email) "
@@ -87,6 +107,7 @@ public class UserService
     ps.setString(4, lastname);
     ps.setString(5, email);
     int rows = ps.executeUpdate(); 
+    pool.freeConnection(connection);
         return rows;
     }
     

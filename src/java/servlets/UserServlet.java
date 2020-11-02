@@ -7,6 +7,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -31,7 +32,12 @@ public class UserServlet extends HttpServlet{
         
       // getting data from database using the UserService
       UserService userService = new UserService();
-      ArrayList<User> user = userService.getAll();
+      try{
+      List<User> user = userService.getAll();
+      }
+      catch (Exception e){
+          
+      }
       request.setAttribute("userList", user);        
         
       getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
@@ -98,42 +104,51 @@ public class UserServlet extends HttpServlet{
                 }
                 session.setAttribute("editing", false);
             } else {
-                int row = userService.insert(userName, fname, lname, password, email);
+                try{
+                    int row = userService.insert(userName, fname, lname, password, email);
+                    }
+                catch (Exception e){
+          
+                }
             }
         }
        
-       
-       userList = userService.getAll();
+    try{
+        userList = userService.getAll();
+    }
+      catch (Exception e){      
+      }
+      
        request.setAttribute("userList", userList);
       
        getServletContext().getRequestDispatcher("/WEB-INF/user.jsp")
                .forward(request,response);
     
     
-    //    if(action != null && action.equals("deleteItem"))
-    //    {
-    //        
-    //        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
-    //               .forward(request,response);
-    //        return;
-    //    }
-    //   
-    //    if(action != null && action.equals("saveItem"))
-    //    {
-    //         
-    //        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
-    //               .forward(request,response);
-    //        return;
-    //    }
-    //     if(action != null && action.equals("editItem"))
-    //    {
-    //        request.setAttribute("message", "Successfully Edit");
-    //        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
-    //               .forward(request,response);
-    //        return;
-    //    }
-    //    getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
-    //               .forward(request,response);
+        if(action != null && action.equals("deleteItem"))
+        {
+            
+            getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+                   .forward(request,response);
+            return;
+        }
+       
+        if(action != null && action.equals("saveItem"))
+        {
+             
+            getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+                   .forward(request,response);
+            return;
+        }
+         if(action != null && action.equals("editItem"))
+        {
+            request.setAttribute("message", "Successfully Edit");
+            getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+                  .forward(request,response);
+            return;
+        }
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
+                   .forward(request,response);
         
     }// ends doPost()
     
