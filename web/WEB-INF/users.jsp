@@ -62,7 +62,9 @@
         </table>
         
            ${message} 
-        <h2>Add User</h2>
+        </div>
+           <div class="add">
+           <h2 id = "sel">Add User</h2>
         <table>
         <form action="users" method="post">
             <tr>
