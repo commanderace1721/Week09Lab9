@@ -10,11 +10,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Users</title>
+        <title>Users-Management</title>
         <link href="./usercss.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>Manager Users</h1>
+        <h1 class="mainTitle">Manager Users</h1>
+        <header> 
+            <tabel class="menu">
+                <tr>        
+                <td class ="og"><h3>About</h3></td>
+                <td class="og"><h3>Contact Us!</h3></td>
+                <td class="og"><h3>403-123-4567</h3></td>
+            </tr>
+            </tabel>
+        </header>
+        <div class ="show">
         <h2>Users</h2>
         <table class="t1">
             <tr>
@@ -53,20 +63,29 @@
         
            ${message} 
         <h2>Add User</h2>
+        <table>
         <form action="users" method="post">
-            <label>Username:</label><input type="text" name="addUser" value="${addUser}">
-            <br>
-            <label>First Name:</label><input type="text" name="addFirstName" value="${addFirstName}">
-            <br>
-            <label>Last Name:</label><input type="text" name="addLastName" value="${addLastName}">
-            <br>
-            <label>Password:</label><input type="text" name="addPassword" value="${addPassword}">
-            <br>
-            <label>Email:</label><input type="text" name="addEmail" value="${addEmail}">
-            <br>
-            <input type="hidden" name="action" value="saveItem">
-            <input type="submit" name="Save" value="Save">
+            <tr>
+                <td><label>Username:</label><input type="text" name="addUser" value="${addUser}"></td>
+            </tr>
+            <label>First Name:</label><input type="text" name="addFirstName" value="${addFirstName}"></td>
+            </tr>
+            <tr>
+                <td><label>Last Name:</label><input type="text" name="addLastName" value="${addLastName}"></td>
+            </tr>
+                <td><label>Password:</label><input type="text" name="addPassword" value="${addPassword}"></td>
+            </tr>
+            <tr>
+                <td><label>Email:</label><input type="text" name="addEmail" value="${addEmail}"></td>
+            </tr>
+            <tr>
+                <td><input type="hidden" name="action" value="saveItem"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="Save" value="Save"></td>
+            </tr>
         </form>    
-        
+        </table>
+    </div>
     </body>
 </html>
