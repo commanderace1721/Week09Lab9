@@ -90,7 +90,7 @@ public class UserService
         return allUsers;
     }
           
-    public int insert(String username, String firstname, String lastname, String password, String email) throws SQLException
+    public int insert(String username, String firstname, String lastname, String password, String email) throws Exception
     {
        ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();

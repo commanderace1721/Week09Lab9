@@ -33,12 +33,13 @@ public class UserServlet extends HttpServlet{
       // getting data from database using the UserService
       UserService userService = new UserService();
       try{
-      List<User> user = userService.getAll();
+      List<User> user = userService.getAll();   
+      request.setAttribute("userList", user);  
       }
       catch (Exception e){
           
       }
-      request.setAttribute("userList", user);        
+        
         
       getServletContext().getRequestDispatcher("/WEB-INF/users.jsp")
                .forward(request,response);
@@ -53,7 +54,7 @@ public class UserServlet extends HttpServlet{
     
        HttpSession session = request.getSession();
        UserService userService = new UserService();
-       ArrayList<User> userList;
+       List<User> userList;
        User userData = (User) request.getAttribute("user");
       
         if(action.equals("deleteItem")){
@@ -115,11 +116,12 @@ public class UserServlet extends HttpServlet{
        
     try{
         userList = userService.getAll();
+        request.setAttribute("userList", userList);
     }
       catch (Exception e){      
       }
       
-       request.setAttribute("userList", userList);
+       
       
        getServletContext().getRequestDispatcher("/WEB-INF/user.jsp")
                .forward(request,response);
