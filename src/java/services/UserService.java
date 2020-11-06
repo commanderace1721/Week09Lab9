@@ -4,16 +4,11 @@
  * and open the template in the editor.
  */
 package services;
-
-import dataaccess.ConnectionPool;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import dataaccess.DBUtil;
+import dataaccess.UserDB;
 import java.util.List;
-import models.User;
+import javax.persistence.EntityManager;
+import models.Users;
 
 /**
  *
@@ -21,114 +16,54 @@ import models.User;
  */
 public class UserService 
 {
+ private UserDB userDB;
+ private Users user;
+
+    public UserService() {
+        userDB = new UserDB();
+        user = new Users();
+    }
+
+    
+    public Users get(String username) throws Exception {
+        return userDB.getUsername(username);
+    }
+
+    public List<Users> getAll(String username) throws Exception {
+        return userDB.getAll();
+    }
 
     public int update(String username, String password, String firstname, String lastname, String email) throws Exception {
-        int rowUpdated = 0;
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        
-        String preparedSQL = "UPDATE users SET "
-                            + "   username = ?," 
-                            + "   password = ?," 
-                            + "   firstname = ?, "
-                            + "   lastname = ?,"
-                            + "   email = ?"
-                            + "WHERE username = ?";
-        
-        PreparedStatement ps = connection.prepareStatement(preparedSQL);
-        
-        ps.setString(1, username);
-        ps.setString(2, password);
-        ps.setString(3, firstname);
-        ps.setString(4, lastname);
-        ps.setString(5, email);
-        ps.setString(6, username);
-        
-        rowUpdated = ps.executeUpdate();
-
-        return rowUpdated;
+        Users user = get(username);
+        user.setPassword(password);
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setEmail(email);
+        return userDB.update(user);
     }
-   
-        
-       public User get(String username) throws Exception {
-        
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        
-        
-        String preparedSQL ="SELECT * " 
-                   + "FROM users WHERE username = ?";
 
+    public int delete(String username) throws Exception {
+        Users user = new Users();
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        Users deletedUser = em.find(Users.class, username);
+        // do not allow the admin to be deleted
         
-        PreparedStatement ps = connection.prepareStatement(preparedSQL);
-        
-        ps.setString(1, username);
-        
-        ResultSet p1 = ps.executeQuery();
-
-          User u1 = new User(p1.getString("username"),p1.getString("password"),
-                  p1.getString("firstname"), p1.getString("lastname"),p1.getString("email"));
-          
-          connection.close();
-
-        return u1;
-     }
-    
-    public List getAll() throws Exception{
-        List<User> allUsers = new ArrayList();
-        
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        Statement ps = connection.createStatement();
-        ResultSet userList = ps.executeQuery("SELECT * FROM users");
-        while(userList.next()){
-            allUsers.add(new User(userList.getString("username"),userList.getString("password"),
-                    userList.getString("firstname"),userList.getString("lastname"),userList.getString("email")));
+        try{
+            if (deletedUser.getUsername().equals("admin")) {
+            return 0;
         }
-        pool.freeConnection(connection);
-        userList.close();
-        return allUsers;
-    }
-          
-    public int insert(String username, String firstname, String lastname, String password, String email) throws Exception
-    {
-       ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        
-    String preparedQuery =
-        "INSERT INTO users "
-    + "(username, password, firstname, lastname,email) "
-    + "VALUES "
-    + "(?, ?, ?, ?, ?)";
-    PreparedStatement ps = connection.prepareStatement(preparedQuery);
-    ps.setString(1, username);
-    ps.setString(2, password);
-    ps.setString(3, firstname);
-    ps.setString(4, lastname);
-    ps.setString(5, email);
-    int rows = ps.executeUpdate(); 
-    pool.freeConnection(connection);
-        return rows;
-    }
+        return userDB.delete(deletedUser);
+        }finally{
+            em.close();
+        }
     
         
-    public int delete(String username) throws Exception{
-        //get connection
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        
-        //prepare Delete statement
-        String deleteQuery = "DELETE FROM users "
-                + "WHERE username = ?";
-        PreparedStatement delete = connection.prepareStatement(deleteQuery);
-        
-        //set the value and excute
-        delete.setString(0, username);
-        int rows = delete.executeUpdate();
-        
-        //release the connection and retrun the number of rows
-        pool.freeConnection(connection);
-        return rows;
-    }  
-    
+    }
+
+    public int insert(String username, String password, String firstname, String lastname, String email) throws Exception {
+        Users user = new Users(username, password, firstname, lastname, email);
+        return userDB.insert(user);
+    }
+
+   
 }
